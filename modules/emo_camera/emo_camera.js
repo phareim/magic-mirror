@@ -88,6 +88,11 @@ Module.register("emo_camera", {
 
 
       var http = new XMLHttpRequest();
+	  http.onreadystatechange = function() {
+	  if (http.readyState == XMLHttpRequest.DONE) {
+        console.log(http.responseText);
+	  }
+}
       var url = "https://api.projectoxford.ai/emotion/v1.0/recognize";
       http.open("POST", url, true);
       //http.setRequestHeader("ocp-apim-subscription-key":"2b12ee0ed92b4fa18d3009b7370b448f");
