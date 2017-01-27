@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MichMich/MagicMirror.git"
+    "url": "git+https://github.com/phareim/MagicMirror.git"
   },
   "keywords": [
     "magic mirror",
@@ -18,13 +18,13 @@
   ],
   "author": "Michael Teeuw",
   "contributors": [
-    "https://github.com/MichMich/MagicMirror/graphs/contributors"
+    "https://github.com/phareim/MagicMirror/graphs/contributors"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MichMich/MagicMirror/issues"
+    "url": "https://github.com/phareim/MagicMirror/issues"
   },
-  "homepage": "https://github.com/MichMich/MagicMirror#readme",
+  "homepage": "https://github.com/phareim/MagicMirror#readme",
   "devDependencies": {
     "grunt": "latest",
     "grunt-eslint": "latest",
