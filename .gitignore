@@ -28,20 +28,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Various OSX ignoramuses.
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.AppleDB
-.AppleDesktop
-Network Trash Folder
+
 Temporary Items
 .apdisk
 
@@ -54,10 +41,7 @@ Temporary Items
 # Various Magic Mirror ignoramuses and anti-ignoramuses.
 
 # Don't ignore the node_helper nore module.
-!/modules/node_helper
-!/modules/node_helper/**
-
-# Ignore all modules except the default modules.
+# Ignore all modules except the default 
 
 # Ignore changes to the custom css files.
 /css/custom.css
