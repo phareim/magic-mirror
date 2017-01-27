@@ -5,7 +5,7 @@
  */
 
 var config = {
-	port: 80,
+	port: 9999,
 	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],
 
 	language: 'no',
