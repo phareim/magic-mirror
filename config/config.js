@@ -32,7 +32,7 @@ var config = {
 			appid: '648212d459dde8390c2a03a5f617ad23'
 		}
 	}, {
-		module: 'camera',
+		module: 'emo_camera',
 		position: 'lower_third',
 		selfieInterval: 3, // Time interval in seconds before the photo will be taken.
 		emailConfig: {
