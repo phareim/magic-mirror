@@ -42,8 +42,9 @@ var config = {
 						user: 'siljehetland@hotmail.com', // Your email account
 						pass: '' // Your password for email account
 					}
-				}*/
-	}]
+				}
+			}*/
+	]
 
 };
 
