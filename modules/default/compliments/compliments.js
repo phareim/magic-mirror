@@ -13,19 +13,20 @@ Module.register("compliments",{
 	defaults: {
 		compliments: {
 			morning: [
-				"Good morning, handsome!",
-				"Enjoy your day!",
-				"How was your sleep?"
+				"God morgen!",
+				"Du er en god skolevenn!",
+				"Ha en fin skoledag!"
 			],
 			afternoon: [
-				"Hello, beauty!",
-				"You look sexy!",
-				"Looking good today!"
+				"Ha en god lunsj",
+				"Alle trenger en skolevenn",
+				"Så grei du er"
 			],
 			evening: [
-				"Wow, you look hot!",
-				"You look nice!",
-				"Hi, sexy!"
+				"Gå forsiktig, noen er glad i deg",
+				"Ha en fin dag!",
+				"Matte er gøy!",
+				"Husk å lese øveord"
 			]
 		},
 		updateInterval: 30000,
