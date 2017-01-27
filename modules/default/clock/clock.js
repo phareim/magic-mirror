@@ -5,10 +5,10 @@
  * By Michael Teeuw http://michaelteeuw.nl
  * MIT Licensed.
  */
-Module.register("clock",{
+Module.register("clock", {
 	// Module config defaults.
 	defaults: {
-		displayType: "digital", // options: digital, analog, both
+		displayType: "analog", // options: digital, analog, both
 
 		timeFormat: config.timeFormat,
 		displaySeconds: true,
@@ -91,7 +91,7 @@ Module.register("clock",{
 				timeString = now.format("h:mm");
 			}
 		}
-		if(this.config.showDate){
+		if (this.config.showDate) {
 			dateWrapper.innerHTML = now.format("dddd, LL");
 		}
 		timeWrapper.innerHTML = timeString;
@@ -112,7 +112,7 @@ Module.register("clock",{
 		 * Create wrappers for ANALOG clock, only if specified in config
 		 */
 
-		 if (this.config.displayType !== "digital") {
+		if (this.config.displayType !== "digital") {
 			// If it isn't 'digital', then an 'analog' clock was also requested
 
 			// Calculate the degree offset for each hand of the clock
@@ -120,7 +120,7 @@ Module.register("clock",{
 			if (this.config.timezone) {
 				now.tz(this.config.timezone);
 			}
-			var	second = now.seconds() * 6,
+			var second = now.seconds() * 6,
 				minute = now.minute() * 6 + second / 60,
 				hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12;
 
@@ -131,8 +131,10 @@ Module.register("clock",{
 			clockCircle.style.width = this.config.analogSize;
 			clockCircle.style.height = this.config.analogSize;
 
-			if (this.config.analogFace != "" && this.config.analogFace != "simple" && this.config.analogFace != "none") {
-				clockCircle.style.background = "url("+ this.data.path + "faces/" + this.config.analogFace + ".svg)";
+			if (this.config.analogFace != "" && this.config.analogFace != "simple" &&
+				this.config.analogFace != "none") {
+				clockCircle.style.background = "url(" + this.data.path + "faces/" + this
+					.config.analogFace + ".svg)";
 				clockCircle.style.backgroundSize = "100%";
 			} else if (this.config.analogFace != "none") {
 				clockCircle.style.border = "2px solid white";
