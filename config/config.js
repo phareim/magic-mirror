@@ -31,6 +31,17 @@ var config = {
 				locationID: '5128581',
 				appid: '648212d459dde8390c2a03a5f617ad23'
 			}
+		},{ 
+		module: 'camera',
+			position: 'lower_third',
+			selfieInterval: 3,  // Time interval in seconds before the photo will be taken.
+			emailConfig: {
+				service: 'Hotmail', // Email provider to use to send email with a photo.
+				auth: {
+					user: 'siljehetland@hotmail.com', // Your email account
+					pass: ''        // Your password for email account
+				}
+			}
 		}
 		/*, {
 				module: 'weatherforecast',
