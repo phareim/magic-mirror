@@ -22,7 +22,7 @@ var config = {
 			position: 'top_left'
 		}, {
 			module: 'compliments',
-			position: 'lower_third'
+			position: 'bottom_bar'
 		}, {
 			module: 'currentweather',
 			position: 'top_right',
