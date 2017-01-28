@@ -7,8 +7,7 @@ Module.register("emo_camera", {
   // Default module config.
   defaults: {
     selfieInterval: 3,
-	setEmotion: function() {
-	},
+    setEmotion: function() {},
     emailConfig: {
       service: 'Hotmail',
       auth: {
@@ -47,11 +46,11 @@ Module.register("emo_camera", {
       if (timer === 4) {
         //clearInterval(interval);
         self.createSnapshot();
-		timer = -1;
+        timer = -1;
       } else {
-		if(self.counter) {
-			self.counter.innerHTML = timer;
-		}
+        if (self.counter) {
+          self.counter.innerHTML = timer;
+        }
         timer++;
       }
     }, 1000);
@@ -93,31 +92,38 @@ Module.register("emo_camera", {
 
 
       var http = new XMLHttpRequest();
-	  http.onreadystatechange = function() {
-		  if (http.readyState == XMLHttpRequest.DONE) {
-			console.log(http.responseText);
-			//self.commands.innerHTML = http.responseText;
-			var data = JSON.parse(http.responseText);
-			
-			if(data.length > 1) {
-				return self.config.setEmotion("multiple");
-			}
-			
-			var firstFace = data[0];
-			var scores = firstFace.scores;
-			delete scores.neutral;
-			var highestValue = 0;
-			var highestEmotion = null;
-			for(var key in scores) {
-				if(scores[key] > highestValue) {
-					highestValue = scores[key];
-					highestEmotion = key;
-				}
-			}
-			
-			self.config.setEmotion(highestEmotion);
-		  }
-	}
+      http.onreadystatechange = function() {
+        if (http.readyState == XMLHttpRequest.DONE) {
+          console.log('ello');
+          console.log(http.responseText);
+          //self.commands.innerHTML = http.responseText;
+
+          var data = JSON.parse(http.responseText);
+
+          if (data === null || data.length == 0) {
+            console.log("empty feelings");
+            return self.config.setEmotion("empty");
+          } else if (data.length === 1) {
+            console.log("feelings");
+          } else if (data.length > 1) {
+            return self.config.setEmotion("multiple");
+          }
+
+          var firstFace = data[0];
+          var scores = firstFace.scores;
+          delete scores.neutral;
+          var highestValue = 0;
+          var highestEmotion = null;
+          for (var key in scores) {
+            if (scores[key] > highestValue) {
+              highestValue = scores[key];
+              highestEmotion = key;
+            }
+          }
+
+          self.config.setEmotion(highestEmotion);
+        }
+      }
       var url = "https://api.projectoxford.ai/emotion/v1.0/recognize";
       http.open("POST", url, true);
       //http.setRequestHeader("ocp-apim-subscription-key":"2b12ee0ed92b4fa18d3009b7370b448f");
@@ -129,13 +135,13 @@ Module.register("emo_camera", {
 
       http.send(file);
 
-	  
+
 
       self.cameraPreview.style.display = 'none';
-      self.sendSocketNotification('SEND_EMAIL', {
+      /*self.sendSocketNotification('SEND_EMAIL', {
         config: self.config,
         dataUrl: data_uri
-      });
+      });*/
       self.commands.innerHTML = "Your selfie will be emailed to you";
       setTimeout(function() {
         self.commands.innerHTML = self.message;
@@ -155,7 +161,7 @@ Module.register("emo_camera", {
       this.camera = document.createElement("div");
       this.counter = document.createElement("div")
       this.counter.style = "text-align: center; padding-bottom: 10px;";
-      this.counter.className = "large normal";
+      this.counter.className = "large bold";
 
       this.camera.appendChild(this.counter);
       this.cameraPreview = document.createElement("div");
@@ -167,7 +173,7 @@ Module.register("emo_camera", {
       this.commands.className = "small light dimmed";
       this.commands.style = "padding-top: 10px;"
       this.camera.appendChild(this.commands);
-	  this.camera.style = "display: none;"
+      this.camera.style = "display: none;"
 
       wrapper.appendChild(this.camera);
 

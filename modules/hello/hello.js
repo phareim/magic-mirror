@@ -138,6 +138,11 @@ Module.register("hello", {
 
     var compliment = document.createTextNode(complimentText);
     var wrapper = document.createElement("div");
+    console.log("HELLO", "getDom", this.config.getEmotion());
+    if (this.config.getEmotion() === "empty") {
+      return wrapper;
+    }
+
     wrapper.className = this.config.classes ? this.config.classes :
       "thin medium bright";
     wrapper.appendChild(compliment);

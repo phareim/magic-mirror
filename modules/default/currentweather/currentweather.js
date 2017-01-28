@@ -7,7 +7,7 @@
  * MIT Licensed.
  */
 
-Module.register("currentweather",{
+Module.register("currentweather", {
 
 	// Default module config.
 	defaults: {
@@ -159,8 +159,14 @@ Module.register("currentweather",{
 	getDom: function() {
 		var wrapper = document.createElement("div");
 
+		if (this.config.getEmotion() === 'empty') {
+			return wrapper;
+		}
+
 		if (this.config.appid === "") {
-			wrapper.innerHTML = "Please set the correct openweather <i>appid</i> in the config for module: " + this.name + ".";
+			wrapper.innerHTML =
+				"Please set the correct openweather <i>appid</i> in the config for module: " +
+				this.name + ".";
 			wrapper.className = "dimmed light small";
 			return wrapper;
 		}
@@ -204,13 +210,15 @@ Module.register("currentweather",{
 	notificationReceived: function(notification, payload, sender) {
 		if (notification === "DOM_OBJECTS_CREATED") {
 			if (this.config.appendLocationNameToHeader) {
-				this.hide(0, {lockString: this.identifier});
+				this.hide(0, {
+					lockString: this.identifier
+				});
 			}
 		}
 		if (notification === "CALENDAR_EVENTS") {
 			var senderClasses = sender.data.classes.toLowerCase().split(" ");
 			if (senderClasses.indexOf(this.config.calendarClass.toLowerCase()) !== -1) {
-				var lastEvent =  this.firstEvent;
+				var lastEvent = this.firstEvent;
 				this.firstEvent = false;
 
 				for (e in payload) {
@@ -235,7 +243,8 @@ Module.register("currentweather",{
 			return;
 		}
 
-		var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.weatherEndpoint + this.getParams();
+		var url = this.config.apiBase + this.config.apiVersion + "/" + this.config
+			.weatherEndpoint + this.getParams();
 		var self = this;
 		var retry = true;
 
@@ -269,16 +278,19 @@ Module.register("currentweather",{
 	 */
 	getParams: function() {
 		var params = "?";
-		if(this.config.locationID) {
+		if (this.config.locationID) {
 			params += "id=" + this.config.locationID;
-		} else if(this.config.location) {
+		} else if (this.config.location) {
 			params += "q=" + this.config.location;
 		} else if (this.firstEvent && this.firstEvent.geo) {
-			params += "lat=" + this.firstEvent.geo.lat + "&lon=" + this.firstEvent.geo.lon
+			params += "lat=" + this.firstEvent.geo.lat + "&lon=" + this.firstEvent.geo
+				.lon
 		} else if (this.firstEvent && this.firstEvent.location) {
 			params += "q=" + this.firstEvent.location;
 		} else {
-			this.hide(this.config.animationSpeed, {lockString:this.identifier});
+			this.hide(this.config.animationSpeed, {
+				lockString: this.identifier
+			});
 			return;
 		}
 
@@ -305,9 +317,9 @@ Module.register("currentweather",{
 		this.humidity = parseFloat(data.main.humidity);
 		this.temperature = this.roundValue(data.main.temp);
 
-		if (this.config.useBeaufort){
+		if (this.config.useBeaufort) {
 			this.windSpeed = this.ms2Beaufort(this.roundValue(data.wind.speed));
-		}else {
+		} else {
 			this.windSpeed = parseFloat(data.wind.speed).toFixed(0);
 		}
 
@@ -322,7 +334,8 @@ Module.register("currentweather",{
 		// The moment().format('h') method has a bug on the Raspberry Pi.
 		// So we need to generate the timestring manually.
 		// See issue: https://github.com/MichMich/MagicMirror/issues/181
-		var sunriseSunsetDateObject = (sunrise < now && sunset > now) ? sunset : sunrise;
+		var sunriseSunsetDateObject = (sunrise < now && sunset > now) ? sunset :
+			sunrise;
 		var timeString = moment(sunriseSunsetDateObject).format("HH:mm");
 		if (this.config.timeFormat !== 24) {
 			//var hours = sunriseSunsetDateObject.getHours() % 12 || 12;
@@ -341,13 +354,18 @@ Module.register("currentweather",{
 		}
 
 		this.sunriseSunsetTime = timeString;
-		this.sunriseSunsetIcon = (sunrise < now && sunset > now) ? "wi-sunset" : "wi-sunrise";
+		this.sunriseSunsetIcon = (sunrise < now && sunset > now) ? "wi-sunset" :
+			"wi-sunrise";
 
 
-		this.show(this.config.animationSpeed, {lockString:this.identifier});
+		this.show(this.config.animationSpeed, {
+			lockString: this.identifier
+		});
 		this.loaded = true;
 		this.updateDom(this.config.animationSpeed);
-		this.sendNotification("CURRENTWEATHER_DATA", {data: data});
+		this.sendNotification("CURRENTWEATHER_DATA", {
+			data: data
+		});
 	},
 
 	/* scheduleUpdate()
@@ -387,7 +405,7 @@ Module.register("currentweather",{
 	},
 
 	deg2Cardinal: function(deg) {
-		if (deg>11.25 && deg<=33.75){
+		if (deg > 11.25 && deg <= 33.75) {
 			return "NNE";
 		} else if (deg > 33.75 && deg <= 56.25) {
 			return "NE";

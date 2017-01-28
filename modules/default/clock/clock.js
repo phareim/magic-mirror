@@ -49,9 +49,12 @@ Module.register("clock", {
 	},
 	// Override dom generator.
 	getDom: function() {
-
 		var wrapper = document.createElement("div");
 
+		var emotion = this.config.getEmotion();
+		if (!emotion || emotion === 'empty') {
+			return wrapper;
+		}
 		/************************************
 		 * Create wrappers for DIGITAL clock
 		 */

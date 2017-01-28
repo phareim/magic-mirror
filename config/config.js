@@ -14,6 +14,12 @@ var config = {
 
 	modules: [{
 			module: 'alert',
+			config: {
+				getEmotion: function() {
+
+					return _emotion;
+				}
+			}
 		},
 		/* {
 				module: 'MMM-Swipe',
@@ -33,18 +39,46 @@ var config = {
 			},*/
 		{
 			module: "updatenotification",
-			position: "top_bar"
+			position: "top_bar",
+			config: {
+				getEmotion: function() {
+
+					return _emotion;
+				}
+			}
 		}, {
 			module: 'clock',
-			position: 'top_left'
+			position: 'top_left',
+			config: {
+				getEmotion: function() {
+
+					return _emotion;
+				}
+			}
 		}, {
 			module: 'hello',
-			position: 'bottom_left'
+			position: 'bottom_left',
+			config: {
+				getEmotion: function() {
+
+					return _emotion;
+				}
+			}
+		}, {
+			module: 'helloworld',
+			position: 'bottom_right',
+			config: {
+				getEmotion: function() {
+
+					return _emotion;
+				}
+			}
 		}, {
 			module: 'compliments',
 			position: 'center',
 			config: {
 				getEmotion: function() {
+
 					return _emotion;
 				}
 			}
@@ -54,7 +88,11 @@ var config = {
 			config: {
 				location: 'Stavanger',
 				locationID: '3137115',
-				appid: '648212d459dde8390c2a03a5f617ad23'
+				appid: '648212d459dde8390c2a03a5f617ad23',
+				getEmotion: function() {
+					return _emotion;
+				},
+				updateInterval: 5000
 			}
 		}, {
 			module: 'emo_camera',

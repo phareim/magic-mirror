@@ -7,7 +7,7 @@
  * MIT Licensed.
  */
 
-Module.register("compliments",{
+Module.register("compliments", {
 
 	// Module config defaults.
 	defaults: {
@@ -36,7 +36,8 @@ Module.register("compliments",{
 			happiness: "Du e goe",
 			neutral: "Ha en fantastisk dag!",
 			sadness: "Trenge du en venn?",
-			surprise: "Du blei skremt nå?"
+			surprise: "Du blei skremt nå?",
+			empty: ""
 		},
 		updateInterval: 3000,
 		remoteFile: null,
@@ -107,7 +108,7 @@ Module.register("compliments",{
 	 */
 	complimentArray: function() {
 		var hour = moment().hour();
-		var compliments  = null;
+		var compliments = null;
 
 		if (hour >= 3 && hour < 12) {
 			compliments = this.config.compliments.morning;
@@ -117,7 +118,7 @@ Module.register("compliments",{
 			compliments = this.config.compliments.evening;
 		}
 
-		if ( this.currentWeatherType in this.config.compliments) {
+		if (this.currentWeatherType in this.config.compliments) {
 			compliments.push.apply(compliments, this.config.compliments[this.currentWeatherType]);
 		}
 		return compliments;
@@ -131,7 +132,7 @@ Module.register("compliments",{
 		var xobj = new XMLHttpRequest();
 		xobj.overrideMimeType("application/json");
 		xobj.open("GET", this.file(this.config.remoteFile), true);
-		xobj.onreadystatechange = function () {
+		xobj.onreadystatechange = function() {
 			if (xobj.readyState == 4 && xobj.status == "200") {
 				callback(xobj.responseText);
 			}
@@ -147,17 +148,18 @@ Module.register("compliments",{
 	randomCompliment: function() {
 		var compliments = this.complimentArray();
 		var index = this.randomIndex(compliments);
-		
+
 		var emotion = this.config.getEmotion();
-		
-		if(emotion) {
+
+		if (emotion) {
+			console.log("found emotion: " + emotion);
 			var emotionCompliment = this.config.compliments[emotion];
-			if(emotionCompliment) {
+			if (emotionCompliment) {
 				return emotionCompliment;
 			}
 		}
-		
-		return compliments[index];
+		return "";
+		//return compliments[index];
 	},
 
 	// Override dom generator.
@@ -166,7 +168,8 @@ Module.register("compliments",{
 		console.log(complimentText);
 		var compliment = document.createTextNode(complimentText);
 		var wrapper = document.createElement("div");
-		wrapper.className = this.config.classes ? this.config.classes : "thin xlarge bright";
+		wrapper.className = this.config.classes ? this.config.classes :
+			"thin xlarge bright";
 		wrapper.appendChild(compliment);
 
 		return wrapper;
