@@ -3,7 +3,7 @@
  * By Michael Teeuw http://michaelteeuw.nl
  * MIT Licensed.
  */
-
+var _emotion = null;
 var config = {
 	port: 9999,
 	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],
@@ -40,7 +40,12 @@ var config = {
 		position: 'bottom_left'
 	}, {
 		module: 'compliments',
-		position: 'bottom_bar'
+		position: 'center',
+		config: {
+			getEmotion: function() {
+				return _emotion;
+			}
+		}
 	}, {
 		module: 'currentweather',
 		position: 'top_right',
@@ -53,6 +58,11 @@ var config = {
 		module: 'emo_camera',
 		position: 'lower_third',
 		selfieInterval: 3, // Time interval in seconds before the photo will be taken.
+		config: {
+			setEmotion: function(emotion) {
+				_emotion = emotion;
+			}
+		},
 		emailConfig: {
 			service: 'Hotmail', // Email provider to use to send email with a photo.
 			auth: {
