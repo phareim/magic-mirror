@@ -151,7 +151,10 @@ Module.register("compliments",{
 		var emotion = this.config.getEmotion();
 		
 		if(emotion) {
-			return this.config.compliments[emotion];
+			var emotionCompliment = this.config.compliments[emotion];
+			if(emotionCompliment) {
+				return emotionCompliment;
+			}
 		}
 		
 		return compliments[index];
