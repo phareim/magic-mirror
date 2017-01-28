@@ -92,7 +92,7 @@ Module.register("clock", {
 			}
 		}
 		if (this.config.showDate) {
-			dateWrapper.innerHTML = now.format("dddd, LL");
+			dateWrapper.innerHTML = "Neste time er: Norsk"; //now.format("dddd, LL");
 		}
 		timeWrapper.innerHTML = timeString;
 		secondsWrapper.innerHTML = now.format("ss");
