@@ -15,11 +15,29 @@ var config = {
 	modules: [{
 		module: 'alert',
 	}, {
+		module: 'MMM-Swipe',
+		position: 'bottom_left', // Doesn't matter after it's setup.  It should be blank.
+		// Best results in one of the side regions like: bottom_left
+		config: {
+			// See 'Configuration options' for more information.
+			echoLeftPin: 24, //Left Sensor's BCM Numbered Echo pin - REQUIRED
+			triggerLeftPin: 23, //Left Sensor's BCM Numbered trigger pin - REQUIRED
+			echoRightPin: 26, //Right Sensor's BCM Numbered Echo pin - REQUIRED
+			triggerRightPin: 25, //Right Sensor's BCM Numbered trigger pin - REQUIRED
+			useAsButton: false, //Enable a GPIO output when you "press".
+			buttonPin: 8,
+			verbose: false,
+			calibrate: false
+		}
+	}, {
 		module: "updatenotification",
 		position: "top_bar"
 	}, {
 		module: 'clock',
 		position: 'top_left'
+	}, {
+		module: 'hello',
+		position: 'bottom_left'
 	}, {
 		module: 'compliments',
 		position: 'center',
