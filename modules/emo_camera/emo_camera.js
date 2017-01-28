@@ -47,7 +47,7 @@ Module.register("emo_camera", {
       if (timer === 4) {
         //clearInterval(interval);
         self.createSnapshot();
-		timer = -10;
+		timer = -1;
       } else {
 		if(self.counter) {
 			self.counter.innerHTML = timer;
@@ -105,7 +105,7 @@ Module.register("emo_camera", {
 			
 			var firstFace = data[0];
 			var scores = firstFace.scores;
-			
+			delete scores.neutral;
 			var highestValue = 0;
 			var highestEmotion = null;
 			for(var key in scores) {
