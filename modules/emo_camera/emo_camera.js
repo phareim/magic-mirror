@@ -7,6 +7,8 @@ Module.register("emo_camera", {
   // Default module config.
   defaults: {
     selfieInterval: 3,
+	setEmotion: function() {
+	},
     emailConfig: {
       service: 'Hotmail',
       auth: {
@@ -45,8 +47,11 @@ Module.register("emo_camera", {
       if (timer === 4) {
         clearInterval(interval);
         self.createSnapshot();
+		timer = 0;
       } else {
-        self.counter.innerHTML = timer;
+		if(self.counter) {
+			self.counter.innerHTML = timer;
+		}
         timer++;
       }
     }, 1000);
@@ -89,10 +94,25 @@ Module.register("emo_camera", {
 
       var http = new XMLHttpRequest();
 	  http.onreadystatechange = function() {
-	  if (http.readyState == XMLHttpRequest.DONE) {
-        console.log(http.responseText);
-	  }
-}
+		  if (http.readyState == XMLHttpRequest.DONE) {
+			console.log(http.responseText);
+			//self.commands.innerHTML = http.responseText;
+			var data = JSON.parse(http.responseText);
+			var firstFace = data[0];
+			var scores = firstFace.scores;
+			
+			var highestValue = 0;
+			var highestEmotion = null;
+			for(var key in scores) {
+				if(scores[key] > highestValue) {
+					highestValue = scores[key];
+					highestEmotion = key;
+				}
+			}
+			console.log(highestEmotion, self);
+			self.config.setEmotion(highestEmotion);
+		  }
+	}
       var url = "https://api.projectoxford.ai/emotion/v1.0/recognize";
       http.open("POST", url, true);
       //http.setRequestHeader("ocp-apim-subscription-key":"2b12ee0ed92b4fa18d3009b7370b448f");
@@ -104,7 +124,7 @@ Module.register("emo_camera", {
 
       http.send(file);
 
-
+	  
 
       self.cameraPreview.style.display = 'none';
       self.sendSocketNotification('SEND_EMAIL', {
@@ -142,6 +162,7 @@ Module.register("emo_camera", {
       this.commands.className = "small light dimmed";
       this.commands.style = "padding-top: 10px;"
       this.camera.appendChild(this.commands);
+	  this.camera.style = "display: none;"
 
       wrapper.appendChild(this.camera);
 

@@ -27,11 +27,22 @@ Module.register("compliments",{
 				"Ha en fin dag!",
 				"Matte er gøy!",
 				"Husk å lese øveord"
-			]
+			],
+			anger: "Roa rekå",
+			contemt: "Det kommer til å gå bra",
+			disgust: "Skjerp deg",
+			fear: "Glad i deg",
+			happiness: "Du e goe",
+			neutral: "Ha en fantastisk dag!",
+			sadness: "Trenge du en venn?",
+			surprise: "Du blei skremt nå?"
 		},
-		updateInterval: 30000,
+		updateInterval: 3000,
 		remoteFile: null,
-		fadeSpeed: 4000
+		fadeSpeed: 0,
+		getEmotion: function() {
+			return null;
+		}
 	},
 
 	// Set currentweather from module
@@ -135,14 +146,20 @@ Module.register("compliments",{
 	randomCompliment: function() {
 		var compliments = this.complimentArray();
 		var index = this.randomIndex(compliments);
-
+		
+		var emotion = this.config.getEmotion();
+		
+		if(emotion) {
+			return this.config.compliments[emotion];
+		}
+		
 		return compliments[index];
 	},
 
 	// Override dom generator.
 	getDom: function() {
 		var complimentText = this.randomCompliment();
-
+		console.log(complimentText);
 		var compliment = document.createTextNode(complimentText);
 		var wrapper = document.createElement("div");
 		wrapper.className = this.config.classes ? this.config.classes : "thin xlarge bright";
