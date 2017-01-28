@@ -28,6 +28,7 @@ Module.register("compliments",{
 				"Matte er gøy!",
 				"Husk å lese øveord"
 			],
+			multiple: "Ojoj! Ser du har med deg en venn",
 			anger: "Roa rekå",
 			contemt: "Det kommer til å gå bra",
 			disgust: "Skjerp deg",
