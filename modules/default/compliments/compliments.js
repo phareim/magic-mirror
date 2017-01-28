@@ -165,7 +165,7 @@ Module.register("compliments", {
 	// Override dom generator.
 	getDom: function() {
 		var complimentText = this.randomCompliment();
-		console.log(complimentText);
+
 		var compliment = document.createTextNode(complimentText);
 		var wrapper = document.createElement("div");
 		wrapper.className = this.config.classes ? this.config.classes :

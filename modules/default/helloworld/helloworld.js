@@ -13,11 +13,54 @@ Module.register("helloworld", {
 	defaults: {
 		text: "Timeplan"
 	},
+
+	getStyles: function() {
+		return ["styles.css"];
+	},
+
+	start: function() {
+		var self = this;
+		setInterval(function() {
+			self.updateDom();
+		}, 3000);
+	},
+
 	getDom: function() {
 
 		var events = [];
-		var wrapper = document.createElement("table");
-		wrapper.className = "small";
+		var wrapper = document.createElement("div");
+
+		if (!this.config.getEmotion() || this.config.getEmotion() === "empty") {
+			return wrapper;
+		}
+
+		var header = document.createElement("h3");
+		header.innerText = "I dag";
+		header.styles = "thin bright";
+		wrapper.appendChild(header);
+
+		var list = document.createElement("ul");
+		var norsk = document.createElement("li");
+		norsk.innerText = "08:15 - Norsk";
+		list.appendChild(norsk);
+		var matte = document.createElement("li");
+		matte.innerText = "09:15 - Matte";
+		list.appendChild(matte);
+		var friminutt = document.createElement("li");
+		friminutt.innerText = "10:15 - Friminutt";
+		list.appendChild(friminutt);
+		var gym = document.createElement("li");
+		gym.innerText = "10:30 - Gym";
+		var lunsj = document.createElement("li");
+		lunsj.innerText = "11:30 - Lunsj";
+		list.appendChild(lunsj);
+		var krle = document.createElement("li");
+		krle.innerText = "12:00 - KRLE";
+		list.appendChild(krle);
+
+		wrapper.appendChild(list);
+
+		wrapper.className = "timeplan";
 		/*
 				if (events.length === 0) {
 					wrapper.innerHTML = (this.loaded) ? this.translate("EMPTY") : this.translate(

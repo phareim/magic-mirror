@@ -159,7 +159,7 @@ Module.register("currentweather", {
 	getDom: function() {
 		var wrapper = document.createElement("div");
 
-		if (this.config.getEmotion() === 'empty') {
+		if (!this.config.getEmotion() || this.config.getEmotion() === 'empty') {
 			return wrapper;
 		}
 

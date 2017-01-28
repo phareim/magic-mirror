@@ -43,10 +43,10 @@ Module.register("emo_camera", {
     var self = this;
     var timer = 1;
     var interval = setInterval(function() {
-      if (timer === 4) {
+      if (timer === 3) {
         //clearInterval(interval);
         self.createSnapshot();
-        timer = -1;
+        timer = 0;
       } else {
         if (self.counter) {
           self.counter.innerHTML = timer;
