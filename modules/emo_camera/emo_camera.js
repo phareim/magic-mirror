@@ -45,9 +45,9 @@ Module.register("emo_camera", {
     var timer = 1;
     var interval = setInterval(function() {
       if (timer === 4) {
-        clearInterval(interval);
+        //clearInterval(interval);
         self.createSnapshot();
-		timer = 0;
+		timer = -10;
       } else {
 		if(self.counter) {
 			self.counter.innerHTML = timer;
@@ -98,6 +98,11 @@ Module.register("emo_camera", {
 			console.log(http.responseText);
 			//self.commands.innerHTML = http.responseText;
 			var data = JSON.parse(http.responseText);
+			
+			if(data.length > 1) {
+				return self.config.setEmotion("multiple");
+			}
+			
 			var firstFace = data[0];
 			var scores = firstFace.scores;
 			
@@ -109,7 +114,7 @@ Module.register("emo_camera", {
 					highestEmotion = key;
 				}
 			}
-			console.log(highestEmotion, self);
+			
 			self.config.setEmotion(highestEmotion);
 		  }
 	}
